@@ -194,9 +194,9 @@ const faq = [
 <style>
   /* ===== Hero ===== */
   .home-hero {
-    /* הכהה יותר בצד הטקסט (ימין ב-RTL), בהיר יותר לכיוון הטופס */
+    /* כהה בצד הטקסט (ימין ב-RTL) לקריאות, שקוף כמעט לגמרי בצד הטופס - שרואים את התמונה */
     background:
-      linear-gradient(to left, rgba(0, 17, 38, 0.88) 0%, rgba(0, 30, 62, 0.78) 55%, rgba(0, 24, 52, 0.62) 100%),
+      linear-gradient(to left, rgba(0, 15, 34, 0.82) 0%, rgba(0, 24, 52, 0.45) 50%, rgba(0, 24, 52, 0.12) 100%),
       url("/images/hero-bg.webp") center 62% / cover no-repeat;
     color: #dce4ee;
     padding-block: clamp(3rem, 7vw, 5.5rem);
@@ -205,7 +205,7 @@ const faq = [
   @media (max-width: 700px) {
     .home-hero {
       background:
-        linear-gradient(rgba(0, 17, 38, 0.85), rgba(0, 24, 52, 0.82)),
+        linear-gradient(rgba(0, 15, 34, 0.72), rgba(0, 20, 44, 0.62)),
         url("/images/hero-bg-mobile.webp") center 30% / cover no-repeat;
     }
   }
@@ -227,6 +227,12 @@ const faq = [
   .home-hero h1 {
     color: var(--white);
     max-width: 46rem;
+    text-shadow: 0 2px 16px rgba(0, 10, 24, 0.55);
+  }
+
+  .home-hero .lead,
+  .home-hero .trust-points li {
+    text-shadow: 0 1px 10px rgba(0, 10, 24, 0.55);
   }
 
   .lead {
