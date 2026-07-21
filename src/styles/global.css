@@ -1,0 +1,323 @@
+/* ===== משתני עיצוב — הצבעים נדגמו מלוגו המיתוג ===== */
+:root {
+  /* צבעי מותג — מתוך מסמך המיתוג הרשמי */
+  --navy-900: #001834;   /* נייבי כהה עמוק — פוטר, רקעים כהים */
+  --navy-800: #00264f;   /* #00264F — הנייבי הראשי מהמיתוג */
+  --navy-700: #0f3d70;   /* נייבי בהיר יותר — hover */
+  --gold-500: #ae9475;   /* #AE9475 — הזהב מהמיתוג */
+  --gold-400: #c7b093;   /* #C7B093 — זהב בהיר מהמיתוג */
+  --gold-100: #f2ede4;   /* שמנת עדינה — רקעי מקטעים */
+  --cream: #faf8f5;      /* רקע כללי חם */
+  --white: #ffffff;
+  --ink: #333333;        /* #333333 — טקסט רץ מהמיתוג */
+  --ink-soft: #55606c;   /* טקסט משני */
+  --line: #e4ded4;       /* קווי הפרדה */
+
+  /* טיפוגרפיה — פונט אחיד בכל האתר (Assistant, קרוב לפונט המיתוג FbColaNew) */
+  --font-heading: "Assistant", "Segoe UI", Arial, sans-serif;
+  --font-body: "Assistant", "Segoe UI", Arial, sans-serif;
+
+  /* מידות */
+  --container: 1120px;
+  --radius: 10px;
+  --shadow: 0 4px 24px rgba(20, 39, 63, 0.08);
+  --shadow-lift: 0 10px 32px rgba(20, 39, 63, 0.14);
+}
+
+/* ===== איפוס ובסיס ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1.075rem;
+  line-height: 1.75;
+  color: var(--ink);
+  background: var(--cream);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ===== טיפוגרפיה ===== */
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+  color: var(--navy-800);
+  line-height: 1.25;
+  margin: 0 0 0.6em;
+  font-weight: 800;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: clamp(1.9rem, 4.5vw, 2.8rem);
+}
+
+h2 {
+  font-size: clamp(1.5rem, 3.2vw, 2rem);
+}
+
+h3 {
+  font-size: clamp(1.2rem, 2.4vw, 1.4rem);
+}
+
+p {
+  margin: 0 0 1.1em;
+}
+
+a {
+  color: var(--navy-700);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--gold-500);
+}
+
+ul,
+ol {
+  padding-inline-start: 1.4em;
+  margin: 0 0 1.2em;
+}
+
+li {
+  margin-bottom: 0.45em;
+}
+
+strong {
+  color: var(--navy-800);
+}
+
+/* ===== פריסה ===== */
+.container {
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+.section {
+  padding-block: clamp(2.5rem, 6vw, 4.5rem);
+}
+
+.section--tint {
+  background: var(--gold-100);
+}
+
+.section--navy {
+  background: var(--navy-900);
+  color: #e8ecf2;
+}
+
+.section--navy h2,
+.section--navy h3 {
+  color: var(--white);
+}
+
+.section--navy a {
+  color: var(--gold-400);
+}
+
+/* פרוזה — עמודי תוכן */
+.prose {
+  max-width: 46rem;
+}
+
+.prose h2 {
+  margin-top: 2.2em;
+  padding-bottom: 0.35em;
+  border-bottom: 2px solid var(--gold-500);
+  display: inline-block;
+}
+
+.prose h3 {
+  margin-top: 1.6em;
+}
+
+.prose ul li::marker {
+  color: var(--gold-500);
+}
+
+/* ===== טבלאות ===== */
+.table-wrap {
+  overflow-x: auto;
+  margin: 0 0 1.4em;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--white);
+  font-size: 1rem;
+  min-width: 480px;
+}
+
+th {
+  background: var(--navy-800);
+  color: var(--white);
+  font-weight: 600;
+  text-align: right;
+  padding: 0.7rem 1rem;
+}
+
+td {
+  padding: 0.65rem 1rem;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+tbody tr:nth-child(even) {
+  background: var(--cream);
+}
+
+/* ===== כפתורים ===== */
+.btn {
+  display: inline-block;
+  padding: 0.8rem 1.9rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 1.05rem;
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  border: 2px solid transparent;
+  cursor: pointer;
+  font-family: var(--font-body);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lift);
+}
+
+.btn--primary {
+  background: var(--navy-800);
+  color: var(--white);
+}
+
+.btn--primary:hover {
+  background: var(--navy-700);
+  color: var(--white);
+}
+
+.btn--gold {
+  background: var(--gold-500);
+  color: var(--navy-900);
+}
+
+.btn--gold:hover {
+  background: var(--gold-400);
+  color: var(--navy-900);
+}
+
+.btn--outline {
+  border-color: var(--navy-800);
+  color: var(--navy-800);
+  background: transparent;
+}
+
+.btn--outline:hover {
+  background: var(--navy-800);
+  color: var(--white);
+}
+
+.section--navy .btn--outline {
+  border-color: var(--gold-400);
+  color: var(--gold-400);
+}
+
+.section--navy .btn--outline:hover {
+  background: var(--gold-400);
+  color: var(--navy-900);
+}
+
+/* ===== כרטיסים ===== */
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 1.6rem;
+  box-shadow: var(--shadow);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lift);
+}
+
+.grid {
+  display: grid;
+  gap: 1.4rem;
+}
+
+.grid--3 {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.grid--2 {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+/* ===== נגישות ===== */
+.skip-link {
+  position: absolute;
+  top: -48px;
+  right: 1rem;
+  background: var(--navy-800);
+  color: var(--white);
+  padding: 0.6rem 1.2rem;
+  border-radius: 0 0 8px 8px;
+  z-index: 200;
+  transition: top 0.2s;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+:focus-visible {
+  outline: 3px solid var(--gold-500);
+  outline-offset: 2px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}

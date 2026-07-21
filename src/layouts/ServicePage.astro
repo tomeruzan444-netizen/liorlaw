@@ -1,0 +1,47 @@
+---
+/**
+ * Layout לעמודי שירות: Base + פירורי לחם + Hero + תוכן (slot) + FAQ + CTA.
+ * כל עמוד שירות מעביר title/description/heroTitle/heroSubtitle/faq.
+ */
+import Base from "./Base.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import Hero from "../components/Hero.astro";
+import FAQ from "../components/FAQ.astro";
+import CTA from "../components/CTA.astro";
+
+interface QA {
+  q: string;
+  a: string;
+}
+
+interface Props {
+  /** meta title */
+  title: string;
+  description: string;
+  path: string;
+  /** שם קצר לפירורי הלחם */
+  crumbTitle: string;
+  heroTitle: string;
+  heroSubtitle?: string;
+  faq?: QA[];
+  ctaTitle?: string;
+  ctaText?: string;
+}
+
+const { title, description, path, crumbTitle, heroTitle, heroSubtitle, faq, ctaTitle, ctaText } =
+  Astro.props;
+
+const crumbs = [{ title: crumbTitle, href: path }];
+---
+
+<Base title={title} description={description} path={path} breadcrumbs={crumbs}>
+  <Breadcrumbs crumbs={crumbs} />
+  <Hero title={heroTitle} subtitle={heroSubtitle} />
+  <article class="section">
+    <div class="container prose">
+      <slot />
+    </div>
+  </article>
+  {faq && faq.length > 0 && <FAQ items={faq} />}
+  <CTA title={ctaTitle} text={ctaText} />
+</Base>

@@ -1,0 +1,450 @@
+---
+import Base from "../layouts/Base.astro";
+import LeadForm from "../components/LeadForm.astro";
+import FAQ from "../components/FAQ.astro";
+import CTA from "../components/CTA.astro";
+import { SITE, SERVICES } from "../config/site";
+
+// אייקוני זהב לכרטיסי השירות (לפי נתיב העמוד)
+const icons: Record<string, string> = {
+  "/mod-claims/": `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M8 21h8M12 6l-6 2 2.5 6a3.5 3.5 0 0 1-5 0L6 8M12 6l6 2-2.5 6a3.5 3.5 0 0 0 5 0L18 8"/></svg>`,
+  "/ptsd-lawyer/": `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.6-9.3-9A5.4 5.4 0 0 1 12 6.3 5.4 5.4 0 0 1 21.3 12C19 16.4 12 21 12 21z"/><path d="M5 12h4l1.5-3 3 6L15 12h4"/></svg>`,
+  "/terror-victims/": `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v5c0 5-3.4 8.6-8 10-4.6-1.4-8-5-8-10V6l8-3z"/><path d="M9 12l2 2 4-4"/></svg>`,
+  "/pension-officer-appeal/": `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 6l5 5M8 11l5-5M10.5 8.5L4 15l2.5 2.5 6.5-6.5M14 21h7M3 21h7"/><path d="M16 3l5 5-2 2-5-5 2-2z"/></svg>`,
+  "/medical-committee/": `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V2.5h6V4M12 9v6M9 12h6"/></svg>`,
+  contact: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-8 8H4l2.2-2.9A8 8 0 1 1 21 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg>`,
+};
+
+const faq = [
+  {
+    q: "האם מגיע לי פיצוי ממשרד הביטחון על פגיעה בשירות?",
+    a: 'אם נפגעתם בגוף או בנפש במהלך השירות הצבאי ועקב השירות - בין אם מדובר בפציעה, במחלה שהחמירה או בפגיעה נפשית - ייתכן שאתם זכאים להכרה כנכי צה"ל ולתגמולים לפי חוק הנכים. הזכאות נבחנת לפי הקשר בין הפגיעה לבין תנאי השירות, ולכן חשוב לבחון כל מקרה לגופו.',
+  },
+  {
+    q: "כמה זמן יש לי להגיש תביעה נגד משרד הביטחון?",
+    a: "ככלל, יש להגיש תביעה להכרה תוך שלוש שנים ממועד השחרור מהשירות. במקרים של פוסט-טראומה או מחלה שהתפרצה מאוחר ייתכנו חריגים - אך אין להסתמך על כך מראש, ומומלץ לפנות לייעוץ מוקדם ככל האפשר.",
+  },
+  {
+    q: "כמה עולה ליווי של עורך דין בתביעה מול משרד הביטחון?",
+    a: "שיחת הייעוץ הראשונית אצלנו אינה כרוכה בתשלום ובהתחייבות. שכר הטרחה נקבע בשקיפות מראש, ובמרבית התיקים הוא מבוסס על הצלחה - כלומר משולם רק אם התביעה מתקבלת.",
+  },
+  {
+    q: "נדחיתי על ידי קצין התגמולים - האם זה סוף הדרך?",
+    a: "ממש לא. על החלטת קצין התגמולים ניתן לערער לוועדת ערעורים בתוך פרק זמן קצוב. חלק ניכר מהדחיות נובע מתשתית רפואית או ראייתית חסרה - וניתן לתקן זאת בערעור מנומק הנתמך בחוות דעת מתאימות.",
+  },
+];
+---
+
+<Base
+  title="עורך דין תביעות משרד הביטחון | ליאור עייש - משרד עורכי דין"
+  description='משרד עורכי דין המתמחה בתביעות מול משרד הביטחון: הכרה כנכי צה"ל, פוסט-טראומה, נפגעי פעולות איבה וועדות רפואיות. שיחת ייעוץ ראשונית ללא התחייבות.'
+  path="/"
+>
+  <!-- ===== Hero: כותרת + טופס לידים על רקע תמונה ===== -->
+  <section class="home-hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">ליאור עייש - משרד עורכי דין</p>
+        <h1>נלחמים עבור הזכויות שלכם מול משרד הביטחון</h1>
+        <p class="lead">
+          נפגעתם בשירות הצבאי? מתמודדים עם פוסט-טראומה? נדחיתם על ידי קצין
+          התגמולים? אנחנו מלווים חיילים, אנשי קבע ונפגעי פעולות איבה - משלב
+          הפנייה הראשונה ועד להכרה מלאה בזכויות.
+        </p>
+        <ul class="trust-points">
+          <li>ליווי אישי לאורך כל הדרך</li>
+          <li>דיסקרטיות מלאה</li>
+          <li>שכר טרחה מבוסס הצלחה</li>
+        </ul>
+        <div class="hero-phone">
+          <a href={`tel:${SITE.phoneIntl}`} class="btn btn--outline">
+            או חייגו עכשיו: <bdo dir="ltr">{SITE.phone}</bdo>
+          </a>
+        </div>
+      </div>
+      <div class="hero-form">
+        <LeadForm />
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== תחומי עיסוק - כרטיסים כהים עם אייקוני זהב ===== -->
+  <section class="section services-dark" aria-labelledby="services-title">
+    <div class="container">
+      <h2 id="services-title">תחומי ההתמחות שלנו</h2>
+      <p class="services-sub">
+        התמחות אחת ממוקדת: מיצוי זכויות של מי שנפגעו במהלך שירותם - מול משרד
+        הביטחון והמוסד לביטוח לאומי.
+      </p>
+      <div class="grid grid--3">
+        {
+          SERVICES.map((s) => (
+            <a class="dark-card" href={s.href}>
+              <span class="dark-card-icon" set:html={icons[s.href]} />
+              <h3>{s.title}</h3>
+              <p>{s.short}</p>
+              <span class="more">למידע נוסף ←</span>
+            </a>
+          ))
+        }
+        <a class="dark-card dark-card--cta" href="/contact/">
+          <span class="dark-card-icon" set:html={icons.contact} />
+          <h3>לא בטוחים מה המסלול שלכם?</h3>
+          <p>ספרו לנו מה עברתם - ונכוון אתכם לדרך הנכונה, ללא עלות וללא התחייבות.</p>
+          <span class="more">דברו איתנו ←</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== אודות מקדים ===== -->
+  <section class="section" aria-labelledby="about-title">
+    <div class="container about-grid">
+      <div class="about-copy">
+        <h2 id="about-title">אודות המשרד</h2>
+        <p>
+          <strong>עו"ד ליאור עייש</strong>, משפטן בעל למעלה מ-14 שנות ניסיון
+          במשפט הפלילי והצבאי, שירת בדרגת סגן אלוף בפרקליטות הצבאית ובסנגוריה
+          הצבאית - בהם כסגן התובע הצבאי הראשי, פרקליט מחוז מטכ"ל והפרקליט
+          לעניינים מבצעיים.
+        </p>
+        <p>
+          ההיכרות המעמיקה עם המערכת - הן מכובע התביעה והן מכובע הסנגוריה -
+          מעניקה ללקוחות המשרד נקודת מבט ייחודית ויתרון אסטרטגי אמיתי: אנחנו
+          יודעים איך המערכת חושבת, ובונים את התיק בהתאם - מהפנייה הראשונה ועד
+          מיצוי מלא של הזכויות.
+        </p>
+        <a href="/about/" class="btn btn--primary">עוד אודות</a>
+      </div>
+      <div class="about-image">
+        <!-- PLACEHOLDER: להחליף בתמונה אמיתית של ליאור/המשרד כשתתקבל -->
+        <img
+          src="/images/about-office.jpg"
+          alt="משרד עורכי דין ליאור עייש"
+          width="760"
+          height="1568"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== למה אנחנו ===== -->
+  <section class="section section--tint" aria-labelledby="why-title">
+    <div class="container">
+      <h2 id="why-title">למה לבחור בנו ללוות אתכם?</h2>
+      <div class="grid grid--3">
+        <div class="why-item">
+          <h3>מומחיות ממוקדת</h3>
+          <p>
+            אנחנו לא עוסקים "גם" בתביעות מול משרד הביטחון - זה תחום ההתמחות
+            שלנו. היכרות עמוקה עם חוק הנכים, עם נהלי אגף השיקום ועם אופן
+            העבודה של הוועדות הרפואיות עושה את ההבדל בתוצאה.
+          </p>
+        </div>
+        <div class="why-item">
+          <h3>ליווי אנושי, לא רק משפטי</h3>
+          <p>
+            מאחורי כל תיק עומד אדם שעבר פגיעה - לעיתים גם טראומה מורכבת.
+            אצלנו תקבלו יחס אישי, סבלנות והסבר ברור על כל שלב, בלי ז'רגון
+            משפטי מיותר.
+          </p>
+        </div>
+        <div class="why-item">
+          <h3>אסטרטגיה לפני הגשה</h3>
+          <p>
+            תביעה מנוצחת נבנית לפני שהיא מוגשת: איסוף תיעוד רפואי, חוות דעת
+            מומחים והצגת התמונה המלאה - כך שהתיק יגיע לקצין התגמולים ולוועדות
+            כשהוא חזק ומבוסס.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== איך זה עובד ===== -->
+  <section class="section" aria-labelledby="process-title">
+    <div class="container">
+      <h2 id="process-title">איך מתחילים? התהליך בארבעה שלבים</h2>
+      <ol class="process">
+        <li>
+          <h3>שיחת ייעוץ ראשונית</h3>
+          <p>נשמע את הסיפור שלכם, נבחן מסמכים ראשוניים וניתן הערכה כנה של סיכויי התיק - ללא עלות וללא התחייבות.</p>
+        </li>
+        <li>
+          <h3>בניית התשתית</h3>
+          <p>איסוף תיעוד רפואי ושירותי, פנייה למומחים רפואיים מתאימים וגיבוש חוות דעת התומכות בקשר שבין הפגיעה לשירות.</p>
+        </li>
+        <li>
+          <h3>הגשה וליווי מול הגורמים</h3>
+          <p>הגשת התביעה לאגף השיקום, מעקב צמוד אחר הטיפול, והכנה יסודית לקראת הוועדה הרפואית - כולל ליווי בוועדה עצמה.</p>
+        </li>
+        <li>
+          <h3>מיצוי מלא של הזכויות</h3>
+          <p>בחינת דרגת הנכות שנקבעה, ערעור במידת הצורך, ווידוא שאתם מקבלים את מלוא התגמולים וההטבות המגיעות לכם.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <FAQ items={faq} />
+  <CTA />
+</Base>
+
+<style>
+  /* ===== Hero ===== */
+  .home-hero {
+    /* הכהה יותר בצד הטקסט (ימין ב-RTL), בהיר יותר לכיוון הטופס */
+    background:
+      linear-gradient(to left, rgba(0, 17, 38, 0.88) 0%, rgba(0, 30, 62, 0.78) 55%, rgba(0, 24, 52, 0.62) 100%),
+      url("/images/hero-bg.webp") center 62% / cover no-repeat;
+    color: #dce4ee;
+    padding-block: clamp(3rem, 7vw, 5.5rem);
+  }
+
+  @media (max-width: 700px) {
+    .home-hero {
+      background:
+        linear-gradient(rgba(0, 17, 38, 0.85), rgba(0, 24, 52, 0.82)),
+        url("/images/hero-bg-mobile.webp") center 30% / cover no-repeat;
+    }
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.35fr 1fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+  }
+
+  .eyebrow {
+    color: var(--gold-400);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.6em;
+  }
+
+  .home-hero h1 {
+    color: var(--white);
+    max-width: 46rem;
+  }
+
+  .lead {
+    font-size: clamp(1.05rem, 2.1vw, 1.25rem);
+    max-width: 42rem;
+    color: #c9d4e2;
+    margin-bottom: 1.5em;
+  }
+
+  .trust-points {
+    display: flex;
+    gap: 1.6rem;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.6rem;
+  }
+
+  .trust-points li {
+    margin: 0;
+    padding-inline-start: 1.5em;
+    position: relative;
+    font-weight: 600;
+    color: #e6ebf2;
+  }
+
+  .trust-points li::before {
+    content: "✓";
+    position: absolute;
+    inset-inline-start: 0;
+    color: var(--gold-400);
+    font-weight: 700;
+  }
+
+  .home-hero .btn--outline {
+    border-color: var(--gold-400);
+    color: var(--gold-400);
+  }
+
+  .home-hero .btn--outline:hover {
+    background: var(--gold-400);
+    color: var(--navy-900);
+  }
+
+  @media (max-width: 900px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ===== שירותים כהים ===== */
+  .services-dark {
+    background: linear-gradient(165deg, var(--navy-900) 0%, var(--navy-800) 100%);
+  }
+
+  .services-dark h2 {
+    color: var(--white);
+    text-align: center;
+    margin-bottom: 0.3em;
+  }
+
+  .services-sub {
+    text-align: center;
+    color: #b9c6d6;
+    max-width: 38rem;
+    margin: 0 auto 2.2rem;
+  }
+
+  .dark-card {
+    background: rgba(255, 255, 255, 0.045);
+    border: 1px solid rgba(174, 148, 117, 0.45);
+    border-radius: var(--radius);
+    padding: 1.7rem 1.5rem;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+  }
+
+  .dark-card:hover {
+    transform: translateY(-4px);
+    background: rgba(255, 255, 255, 0.09);
+    border-color: var(--gold-400);
+  }
+
+  .dark-card-icon {
+    width: 46px;
+    height: 46px;
+    color: var(--gold-400);
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .dark-card-icon :global(svg) {
+    width: 100%;
+    height: 100%;
+  }
+
+  .dark-card h3 {
+    color: var(--white);
+    font-size: 1.2rem;
+    margin-bottom: 0.45em;
+  }
+
+  .dark-card p {
+    color: #b9c6d6;
+    font-size: 0.98rem;
+    margin-bottom: 1em;
+    flex-grow: 1;
+  }
+
+  .dark-card .more {
+    color: var(--gold-400);
+    font-weight: 600;
+  }
+
+  .dark-card:hover .more {
+    text-decoration: underline;
+  }
+
+  .dark-card--cta {
+    background: rgba(174, 148, 117, 0.14);
+  }
+
+  /* ===== אודות מקדים ===== */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+  }
+
+  .about-copy h2 {
+    padding-bottom: 0.35em;
+    border-bottom: 2px solid var(--gold-500);
+    display: inline-block;
+  }
+
+  .about-copy .btn {
+    margin-top: 0.6rem;
+  }
+
+  .about-image img {
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lift);
+    max-height: 460px;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  @media (max-width: 860px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .about-image {
+      order: -1;
+    }
+
+    .about-image img {
+      max-height: 300px;
+    }
+  }
+
+  /* ===== למה אנחנו ===== */
+  .why-item h3 {
+    padding-bottom: 0.3em;
+    border-bottom: 2px solid var(--gold-500);
+    display: inline-block;
+  }
+
+  /* ===== שלבי תהליך ===== */
+  .process {
+    list-style: none;
+    padding: 0;
+    counter-reset: step;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.4rem;
+    max-width: none;
+  }
+
+  .process li {
+    counter-increment: step;
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 1.5rem;
+    position: relative;
+    padding-top: 3.4rem;
+    margin: 0;
+  }
+
+  .process li::before {
+    content: counter(step);
+    position: absolute;
+    top: 1.1rem;
+    inset-inline-start: 1.3rem;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: var(--gold-500);
+    color: var(--navy-900);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-heading);
+  }
+
+  .process h3 {
+    font-size: 1.15rem;
+    margin-bottom: 0.35em;
+  }
+
+  .process p {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 0.98rem;
+  }
+</style>

@@ -1,0 +1,81 @@
+---
+/** Hero לעמודים פנימיים - כותרת H1, תת-כותרת וכפתורי פעולה. */
+import { SITE } from "../config/site";
+
+interface Props {
+  title: string;
+  subtitle?: string;
+  /** להציג כפתורי CTA (ברירת מחדל: כן) */
+  cta?: boolean;
+}
+
+const { title, subtitle, cta = true } = Astro.props;
+---
+
+<section class="hero">
+  <div class="container">
+    <h1>{title}</h1>
+    {subtitle && <p class="hero-subtitle">{subtitle}</p>}
+    {
+      cta && (
+        <div class="hero-actions">
+          <a href="/contact/" class="btn btn--gold">לתיאום שיחת ייעוץ</a>
+          <a href={`tel:${SITE.phoneIntl}`} class="btn btn--outline">
+            חייגו: <bdo dir="ltr">{SITE.phone}</bdo>
+          </a>
+        </div>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .hero {
+    background: linear-gradient(160deg, var(--navy-900) 0%, var(--navy-800) 70%, #063462 100%);
+    color: #e8ecf2;
+    padding-block: clamp(2.8rem, 7vw, 5rem);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* מונוגרמה עדינה ברקע */
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset-block: -20%;
+    inset-inline-end: -4%;
+    width: 340px;
+    background: url("/images/logo-horizontal-white.png") no-repeat center / contain;
+    opacity: 0.05;
+    pointer-events: none;
+  }
+
+  h1 {
+    color: var(--white);
+    max-width: 44rem;
+    margin-bottom: 0.4em;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1.1rem, 2.2vw, 1.3rem);
+    max-width: 40rem;
+    color: #c9d4e2;
+    margin-bottom: 1.6em;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .hero .btn--outline {
+    border-color: var(--gold-400);
+    color: var(--gold-400);
+  }
+
+  .hero .btn--outline:hover {
+    background: var(--gold-400);
+    color: var(--navy-900);
+  }
+</style>

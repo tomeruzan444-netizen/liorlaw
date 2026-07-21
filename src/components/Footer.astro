@@ -1,0 +1,145 @@
+---
+import { SITE, SERVICES } from "../config/site";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <img
+        src="/images/logo-horizontal-white.png"
+        alt=""
+        width="240"
+        height="78"
+        loading="lazy"
+      />
+      <p>
+        משרדו של עו"ד ליאור עייש, לשעבר סגן התובע הצבאי הראשי, מתמחה במיצוי
+        זכויות מול משרד הביטחון והמוסד לביטוח לאומי - ליווי אישי, מקצועי
+        ודיסקרטי מהפנייה הראשונה ועד להכרה בזכויות.
+      </p>
+    </div>
+
+    <nav class="footer-col" aria-label="תחומי עיסוק">
+      <h3>תחומי עיסוק</h3>
+      <ul>
+        {SERVICES.map((s) => (
+          <li><a href={s.href}>{s.title}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <nav class="footer-col" aria-label="ניווט משני">
+      <h3>ניווט</h3>
+      <ul>
+        <li><a href="/">בית</a></li>
+        <li><a href="/about/">אודות המשרד</a></li>
+        <li><a href="/contact/">יצירת קשר</a></li>
+        <li><a href="/privacy-policy/">מדיניות פרטיות</a></li>
+        <li><a href="/accessibility/">הצהרת נגישות</a></li>
+      </ul>
+    </nav>
+
+    <div class="footer-col">
+      <h3>יצירת קשר</h3>
+      <ul class="contact-list">
+        <li>
+          <a href={`tel:${SITE.phoneIntl}`}>טלפון: <bdo dir="ltr">{SITE.phone}</bdo></a>
+        </li>
+        <li>
+          <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+        </li>
+        <li>{SITE.address.full}</li>
+        <li>{SITE.hours}</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container">
+      <p>
+        © {year} {SITE.name}. כל הזכויות שמורות. האמור באתר אינו מהווה ייעוץ משפטי
+        ואינו תחליף לייעוץ אישי.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--navy-900);
+    color: #ccd6e2;
+    margin-top: 3rem;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 0.8fr 1fr;
+    gap: 2.5rem;
+    padding-block: 3rem 2rem;
+  }
+
+  .footer-brand img {
+    width: 220px;
+    margin-bottom: 1rem;
+  }
+
+  .footer-brand p {
+    font-size: 0.98rem;
+    line-height: 1.7;
+  }
+
+  .footer-col h3 {
+    color: var(--gold-400);
+    font-size: 1.1rem;
+    margin-bottom: 0.9rem;
+    font-family: var(--font-body);
+    font-weight: 700;
+  }
+
+  .footer-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-col li {
+    margin-bottom: 0.55rem;
+    font-size: 0.98rem;
+  }
+
+  .footer-col a {
+    color: #ccd6e2;
+    text-decoration: none;
+  }
+
+  .footer-col a:hover {
+    color: var(--gold-400);
+    text-decoration: underline;
+  }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    padding-block: 1.1rem;
+  }
+
+  .footer-bottom p {
+    margin: 0;
+    font-size: 0.88rem;
+    color: #9fadbf;
+  }
+
+  @media (max-width: 900px) {
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: 1.8rem;
+    }
+  }
+</style>

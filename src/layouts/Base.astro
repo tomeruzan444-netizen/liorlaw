@@ -1,0 +1,130 @@
+---
+/**
+ * Layout בסיס לכל עמודי האתר.
+ * אחראי על: meta, canonical, Open Graph, JSON-LD (LegalService + BreadcrumbList),
+ * פונטים, CSS גלובלי, Header/Footer וכפתור וואטסאפ צף.
+ */
+import "@fontsource/assistant/400.css";
+import "@fontsource/assistant/600.css";
+import "@fontsource/assistant/700.css";
+import "@fontsource/assistant/800.css";
+import "../styles/global.css";
+
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import WhatsAppFloat from "../components/WhatsAppFloat.astro";
+import { SITE, SITE_URL } from "../config/site";
+
+interface Crumb {
+  title: string;
+  href: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  /** נתיב העמוד, למשל "/mod-claims/" - משמש ל-canonical ול-OG */
+  path: string;
+  /** פירורי לחם ל-Schema (הבית נוסף אוטומטית) */
+  breadcrumbs?: Crumb[];
+  ogImage?: string;
+}
+
+const { title, description, path, breadcrumbs = [], ogImage = "/images/og-default.jpg" } = Astro.props;
+
+const canonical = new URL(path, SITE_URL).href;
+const ogImageAbs = new URL(ogImage, SITE_URL).href;
+
+// Schema גלובלי - משרד עורכי דין
+const legalServiceSchema = {
+  "@context": "https://schema.org",
+  "@type": "LegalService",
+  "@id": `${SITE_URL}/#organization`,
+  name: SITE.name,
+  description: SITE.description,
+  url: SITE_URL,
+  logo: new URL("/images/logo-stacked-navy.png", SITE_URL).href,
+  image: ogImageAbs,
+  telephone: SITE.phoneIntl,
+  email: SITE.email,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: SITE.address.street,
+    addressLocality: SITE.address.city,
+    addressCountry: "IL",
+  },
+  areaServed: { "@type": "Country", name: "ישראל" },
+  founder: {
+    "@type": "Person",
+    name: 'עו"ד ליאור עייש',
+    jobTitle: "עורך דין",
+    description:
+      'משפטן בעל למעלה מ-14 שנות ניסיון במשפט הפלילי והצבאי. שירת בדרגת סגן אלוף בפרקליטות הצבאית ובסנגוריה הצבאית, בתפקידים בכירים ובהם סגן התובע הצבאי הראשי, פרקליט מחוז מטכ"ל והפרקליט לעניינים מבצעיים.',
+    alumniOf: [
+      { "@type": "CollegeOrUniversity", name: "האוניברסיטה העברית בירושלים" },
+      { "@type": "CollegeOrUniversity", name: "אוניברסיטת תל-אביב" },
+    ],
+  },
+  knowsAbout: [
+    "תביעות נגד משרד הביטחון",
+    "הכרה בנכות צה\"ל",
+    "פוסט טראומה בשירות צבאי",
+    "נפגעי פעולות איבה",
+    "ערעור על החלטת קצין תגמולים",
+    "ועדות רפואיות בביטוח לאומי",
+  ],
+};
+
+const breadcrumbSchema =
+  breadcrumbs.length > 0
+    ? {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "בית", item: SITE_URL + "/" },
+          ...breadcrumbs.map((c, i) => ({
+            "@type": "ListItem",
+            position: i + 2,
+            name: c.title,
+            item: new URL(c.href, SITE_URL).href,
+          })),
+        ],
+      }
+    : null;
+---
+
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageAbs} />
+    <meta property="og:locale" content="he_IL" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(legalServiceSchema)} />
+    {breadcrumbSchema && <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />}
+  </head>
+  <body>
+    <a href="#main" class="skip-link">דילוג לתוכן הראשי</a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+    <WhatsAppFloat />
+  </body>
+</html>

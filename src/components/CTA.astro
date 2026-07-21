@@ -1,0 +1,71 @@
+---
+/** מקטע קריאה לפעולה - רצועה כהה עם כפתורים. */
+import { SITE } from "../config/site";
+
+interface Props {
+  title?: string;
+  text?: string;
+}
+
+const {
+  title = "רוצים לדעת אם מגיעות לכם זכויות?",
+  text = "שיחת ייעוץ ראשונית - ללא התחייבות ובדיסקרטיות מלאה. נבחן יחד את המקרה שלכם וניתן לכם תמונה ברורה של האפשרויות.",
+} = Astro.props;
+---
+
+<section class="cta section--navy">
+  <div class="container cta-inner">
+    <div>
+      <h2>{title}</h2>
+      <p>{text}</p>
+    </div>
+    <div class="cta-actions">
+      <a href="/contact/" class="btn btn--gold">השאירו פרטים</a>
+      <a href={SITE.whatsapp} class="btn btn--outline" target="_blank" rel="noopener">
+        שלחו וואטסאפ
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta {
+    background: linear-gradient(150deg, var(--navy-900), var(--navy-800));
+    color: #dbe3ec;
+    padding-block: clamp(2.2rem, 5vw, 3.5rem);
+  }
+
+  .cta-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .cta h2 {
+    color: var(--white);
+    margin-bottom: 0.3em;
+  }
+
+  .cta p {
+    margin: 0;
+    max-width: 34rem;
+  }
+
+  .cta-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .cta .btn--outline {
+    border-color: var(--gold-400);
+    color: var(--gold-400);
+  }
+
+  .cta .btn--outline:hover {
+    background: var(--gold-400);
+    color: var(--navy-900);
+  }
+</style>

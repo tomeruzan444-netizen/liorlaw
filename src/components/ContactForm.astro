@@ -1,0 +1,176 @@
+---
+/**
+ * טופס יצירת קשר.
+ * כרגע הטופס עובד במצב "הדגמה" (מציג הודעת הצלחה בלי שליחה בפועל).
+ * חיבור אמיתי: נרשמים ל-https://web3forms.com (חינם), מקבלים Access Key,
+ * מציבים אותו ב-WEB3FORMS_KEY למטה - והטופס ישלח למייל שהוגדר שם.
+ */
+const WEB3FORMS_KEY = ""; // PLACEHOLDER - להשלים כשנחבר את הטופס
+---
+
+<form class="contact-form" method="POST" action="https://api.web3forms.com/submit" novalidate>
+  {WEB3FORMS_KEY && <input type="hidden" name="access_key" value={WEB3FORMS_KEY} />}
+  <input type="checkbox" name="botcheck" style="display: none;" tabindex="-1" autocomplete="off" />
+
+  <div class="form-row">
+    <div class="form-field">
+      <label for="cf-name">שם מלא <span aria-hidden="true">*</span></label>
+      <input id="cf-name" name="name" type="text" required autocomplete="name" />
+    </div>
+    <div class="form-field">
+      <label for="cf-phone">טלפון <span aria-hidden="true">*</span></label>
+      <input id="cf-phone" name="phone" type="tel" required autocomplete="tel" dir="ltr" />
+    </div>
+  </div>
+
+  <div class="form-field">
+    <label for="cf-email">דוא"ל</label>
+    <input id="cf-email" name="email" type="email" autocomplete="email" dir="ltr" />
+  </div>
+
+  <div class="form-field">
+    <label for="cf-topic">נושא הפנייה</label>
+    <select id="cf-topic" name="topic">
+      <option value="">בחרו נושא (לא חובה)</option>
+      <option>תביעה נגד משרד הביטחון</option>
+      <option>פוסט טראומה</option>
+      <option>נפגעי פעולות איבה</option>
+      <option>ערעור על קצין תגמולים</option>
+      <option>ועדה רפואית בביטוח לאומי</option>
+      <option>אחר</option>
+    </select>
+  </div>
+
+  <div class="form-field">
+    <label for="cf-message">תיאור קצר של הפנייה <span aria-hidden="true">*</span></label>
+    <textarea id="cf-message" name="message" rows="5" required></textarea>
+  </div>
+
+  <p class="form-privacy">
+    הפרטים שתמסרו ישמשו ליצירת קשר בלבד ויטופלו בהתאם ל<a href="/privacy-policy/">מדיניות הפרטיות</a> שלנו.
+  </p>
+
+  <button type="submit" class="btn btn--primary">שליחת הפנייה</button>
+
+  <p class="form-status" role="status" aria-live="polite"></p>
+</form>
+
+<style>
+  .contact-form {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 1.8rem;
+    max-width: 40rem;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  @media (max-width: 560px) {
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .form-field {
+    margin-bottom: 1.1rem;
+  }
+
+  label {
+    display: block;
+    font-weight: 600;
+    color: var(--navy-800);
+    margin-bottom: 0.35rem;
+  }
+
+  label span {
+    color: #b3261e;
+  }
+
+  input,
+  select,
+  textarea {
+    width: 100%;
+    padding: 0.65rem 0.9rem;
+    border: 1.5px solid var(--line);
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    background: var(--cream);
+    color: var(--ink);
+  }
+
+  input:focus,
+  select:focus,
+  textarea:focus {
+    outline: none;
+    border-color: var(--gold-500);
+    box-shadow: 0 0 0 3px rgba(174, 148, 117, 0.2);
+  }
+
+  textarea {
+    resize: vertical;
+  }
+
+  .form-privacy {
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+  }
+
+  .form-status {
+    margin: 0.9rem 0 0;
+    font-weight: 600;
+  }
+
+  .form-status.ok {
+    color: #1a7a3a;
+  }
+
+  .form-status.err {
+    color: #b3261e;
+  }
+</style>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>(".contact-form");
+  const status = form?.querySelector<HTMLElement>(".form-status");
+
+  form?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (!form.reportValidity() || !status) return;
+
+    const hasKey = !!form.querySelector('input[name="access_key"]');
+    status.textContent = "שולח...";
+    status.className = "form-status";
+
+    if (!hasKey) {
+      // מצב הדגמה - אין עדיין מפתח שליחה
+      status.textContent = "תודה על פנייתכם! (הטופס עדיין לא מחובר - נחזור אליכם לאחר החיבור)";
+      status.className = "form-status ok";
+      form.reset();
+      return;
+    }
+
+    try {
+      const res = await fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { Accept: "application/json" },
+      });
+      if (res.ok) {
+        status.textContent = "הפנייה נשלחה בהצלחה! ניצור אתכם קשר בהקדם.";
+        status.className = "form-status ok";
+        form.reset();
+      } else {
+        throw new Error();
+      }
+    } catch {
+      status.textContent = "אירעה שגיאה בשליחה. אפשר להתקשר אלינו ישירות או לנסות שוב.";
+      status.className = "form-status err";
+    }
+  });
+</script>

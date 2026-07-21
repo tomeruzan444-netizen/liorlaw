@@ -1,0 +1,22 @@
+---
+import Base from "../layouts/Base.astro";
+import ServiceCards from "../components/ServiceCards.astro";
+---
+
+<Base
+  title="העמוד לא נמצא | ליאור עייש - משרד עורכי דין"
+  description="העמוד שחיפשתם אינו קיים. עברו לעמוד הבית או לאחד מתחומי העיסוק של המשרד."
+  path="/404/"
+>
+  <section class="section">
+    <div class="container" style="text-align: center;">
+      <h1>אופס - העמוד לא נמצא</h1>
+      <p>ייתכן שהקישור השתנה או שהעמוד הוסר. הנה כמה דרכים להמשיך:</p>
+      <p>
+        <a href="/" class="btn btn--primary">לעמוד הבית</a>
+        <a href="/contact/" class="btn btn--outline" style="margin-inline-start: 0.8rem;">ליצירת קשר</a>
+      </p>
+    </div>
+  </section>
+  <ServiceCards />
+</Base>

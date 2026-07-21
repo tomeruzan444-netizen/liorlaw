@@ -1,0 +1,127 @@
+---
+import Base from "../layouts/Base.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import Hero from "../components/Hero.astro";
+import ContactForm from "../components/ContactForm.astro";
+import { SITE } from "../config/site";
+
+const crumbs = [{ title: "יצירת קשר", href: "/contact/" }];
+---
+
+<Base
+  title="יצירת קשר | ליאור עייש - משרד עורכי דין"
+  description="צרו קשר לשיחת ייעוץ ראשונית ללא התחייבות בנושא תביעות מול משרד הביטחון, פוסט-טראומה, נפגעי איבה וועדות רפואיות. טלפון, וואטסאפ או טופס - ונחזור אליכם בהקדם."
+  path="/contact/"
+  breadcrumbs={crumbs}
+>
+  <Breadcrumbs crumbs={crumbs} />
+  <Hero
+    title="יצירת קשר"
+    subtitle="ספרו לנו בקצרה מה עברתם - ונחזור אליכם עם תשובה כנה. כל פנייה מטופלת בדיסקרטיות מלאה."
+    cta={false}
+  />
+
+  <section class="section">
+    <div class="container contact-grid">
+      <div>
+        <h2>השאירו פרטים ונחזור אליכם</h2>
+        <ContactForm />
+      </div>
+
+      <aside class="contact-aside">
+        <h2>דרכים נוספות</h2>
+        <ul class="contact-ways">
+          <li>
+            <strong>טלפון</strong>
+            <a href={`tel:${SITE.phoneIntl}`}><bdo dir="ltr">{SITE.phone}</bdo></a>
+          </li>
+          <li>
+            <strong>וואטסאפ</strong>
+            <a href={SITE.whatsapp} target="_blank" rel="noopener">שלחו הודעה ונחזור אליכם</a>
+          </li>
+          <li>
+            <strong>דוא"ל</strong>
+            <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+          </li>
+          <li>
+            <strong>כתובת</strong>
+            <span>{SITE.address.full}</span>
+          </li>
+          <li>
+            <strong>שעות פעילות</strong>
+            <span>{SITE.hours}</span>
+          </li>
+        </ul>
+
+        <div class="contact-note">
+          <h3>מה כדאי להכין לשיחה?</h3>
+          <ul>
+            <li>תיאור קצר של האירוע או המצב הרפואי</li>
+            <li>מסמכים רפואיים עיקריים, אם יש</li>
+            <li>מכתבי החלטה שקיבלתם (קצין תגמולים, ביטוח לאומי)</li>
+          </ul>
+          <p>אין מסמכים? לא נורא - נתחיל מהסיפור שלכם.</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  @media (max-width: 860px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .contact-ways {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem;
+  }
+
+  .contact-ways li {
+    display: flex;
+    flex-direction: column;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .contact-ways strong {
+    color: var(--gold-500);
+    font-size: 0.9rem;
+  }
+
+  .contact-ways a {
+    color: var(--navy-800);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .contact-ways a:hover {
+    color: var(--gold-500);
+  }
+
+  .contact-note {
+    background: var(--gold-100);
+    border-radius: var(--radius);
+    padding: 1.4rem;
+  }
+
+  .contact-note h3 {
+    margin-top: 0;
+  }
+
+  .contact-note p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+  }
+</style>
