@@ -39,6 +39,10 @@ const faq = [
   title="עורך דין תביעות משרד הביטחון | ליאור עייש - משרד עורכי דין"
   description='משרד עורכי דין המתמחה בתביעות מול משרד הביטחון: הכרה כנכי צה"ל, פוסט-טראומה, נפגעי פעולות איבה וועדות רפואיות. שיחת ייעוץ ראשונית ללא התחייבות.'
   path="/"
+  preloadImages={[
+    { href: "/images/hero-bg.webp", media: "(min-width: 701px)" },
+    { href: "/images/hero-bg-mobile.webp", media: "(max-width: 700px)" },
+  ]}
 >
   <!-- ===== Hero: כותרת + טופס לידים על רקע תמונה ===== -->
   <section class="home-hero">
@@ -64,6 +68,24 @@ const faq = [
       </div>
       <div class="hero-form">
         <LeadForm />
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== רצועת נתונים - אמון במספרים ===== -->
+  <section class="stats" aria-label="נתוני המשרד">
+    <div class="container stats-grid">
+      <div class="stat">
+        <span class="stat-num">14+</span>
+        <span class="stat-label">שנות ניסיון במשפט הפלילי והצבאי</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">סא"ל</span>
+        <span class="stat-label">במיל', לשעבר סגן התובע הצבאי הראשי</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">100%</span>
+        <span class="stat-label">ליווי אישי - מהפנייה ועד מיצוי הזכויות</span>
       </div>
     </div>
   </section>
@@ -128,6 +150,10 @@ const faq = [
       </div>
     </div>
   </section>
+
+  <div class="brand-divider" aria-hidden="true">
+    <img src="/images/monogram-navy.png" alt="" width="30" height="29" loading="lazy" />
+  </div>
 
   <!-- ===== למה אנחנו ===== -->
   <section class="section section--tint" aria-labelledby="why-title">
@@ -319,16 +345,55 @@ const faq = [
   }
 
   .dark-card-icon {
-    width: 46px;
-    height: 46px;
+    width: 62px;
+    height: 62px;
     color: var(--gold-400);
-    margin-bottom: 1rem;
-    display: block;
+    margin-bottom: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(174, 148, 117, 0.14);
+    border: 1px solid rgba(174, 148, 117, 0.35);
   }
 
   .dark-card-icon :global(svg) {
-    width: 100%;
-    height: 100%;
+    width: 30px;
+    height: 30px;
+  }
+
+  /* ===== רצועת נתונים ===== */
+  .stats {
+    background: var(--gold-100);
+    border-bottom: 1px solid var(--line);
+    padding-block: 1.6rem;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    text-align: center;
+  }
+
+  .stat-num {
+    display: block;
+    font-size: clamp(1.6rem, 3vw, 2.1rem);
+    font-weight: 800;
+    color: var(--navy-800);
+    line-height: 1.2;
+  }
+
+  .stat-label {
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 700px) {
+    .stats-grid {
+      grid-template-columns: 1fr;
+      gap: 1.1rem;
+    }
   }
 
   .dark-card h3 {

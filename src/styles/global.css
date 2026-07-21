@@ -154,8 +154,14 @@ strong {
 .prose h2 {
   margin-top: 2.2em;
   padding-bottom: 0.35em;
-  border-bottom: 2px solid var(--gold-500);
+  border-bottom: 2px solid;
+  border-image: linear-gradient(to left, var(--gold-500), var(--gold-400) 55%, transparent) 1;
   display: inline-block;
+}
+
+/* מקטע שאלות נפוצות - רקע שמנת להפרדה מהעמוד */
+section.faq {
+  background: var(--gold-100);
 }
 
 .prose h3 {
@@ -267,6 +273,7 @@ tbody tr:nth-child(even) {
 /* ===== כרטיסים ===== */
 .card {
   background: var(--white);
+  border: 1px solid rgba(199, 176, 147, 0.35);
   border-radius: var(--radius);
   padding: 1.6rem;
   box-shadow: var(--shadow);
@@ -292,6 +299,48 @@ tbody tr:nth-child(even) {
 }
 
 /* ===== נגישות ===== */
+/* ===== אנימציית גילוי בגלילה - CSS בלבד + IntersectionObserver זעיר =====
+   מופעל רק כש-JS זמין (html.js) כדי שהתוכן לעולם לא יוסתר בלעדיו */
+.js main section:not(.in-view) {
+  opacity: 0;
+  transform: translateY(18px);
+}
+
+main section {
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js main section:not(.in-view) {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ===== מפריד מקטעים עם מונוגרמת המותג ===== */
+.brand-divider {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+.brand-divider::before,
+.brand-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to left, transparent, var(--gold-400), transparent);
+}
+
+.brand-divider img {
+  width: 30px;
+  height: auto;
+  opacity: 0.8;
+}
+
 .skip-link {
   position: absolute;
   top: -48px;

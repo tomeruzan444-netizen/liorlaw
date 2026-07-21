@@ -33,6 +33,24 @@ const {
     background: linear-gradient(150deg, var(--navy-900), var(--navy-800));
     color: #dbe3ec;
     padding-block: clamp(2.2rem, 5vw, 3.5rem);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* מונוגרמת המותג כסימן מים עדין */
+  .cta::before {
+    content: "";
+    position: absolute;
+    inset-block: -30%;
+    inset-inline-start: -2%;
+    width: 260px;
+    background: url("/images/monogram-white.png") no-repeat center / contain;
+    opacity: 0.05;
+    pointer-events: none;
+  }
+
+  .cta-inner {
+    position: relative;
   }
 
   .cta-inner {

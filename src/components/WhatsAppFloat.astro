@@ -21,21 +21,28 @@ import { SITE } from "../config/site";
     position: fixed;
     bottom: 1.4rem;
     inset-inline-start: 1.4rem;
-    width: 58px;
-    height: 58px;
+    width: 52px;
+    height: 52px;
     border-radius: 50%;
-    background: #25d366;
+    background: #23b858;
     color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    border: 2px solid rgba(255, 255, 255, 0.85);
+    box-shadow: 0 5px 18px rgba(0, 16, 39, 0.3);
     z-index: 90;
-    transition: transform 0.15s ease;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .wa-float svg {
+    width: 26px;
+    height: 26px;
   }
 
   .wa-float:hover {
-    transform: scale(1.08);
+    transform: scale(1.07);
+    box-shadow: 0 8px 24px rgba(0, 16, 39, 0.4);
     color: #fff;
   }
 </style>
