@@ -1,5 +1,8 @@
 ---
-/** Hero לעמודים פנימיים - כותרת H1, תת-כותרת וכפתורי פעולה. */
+/**
+ * Hero לעמודים פנימיים - כותרת H1, תת-כותרת וכפתורי פעולה,
+ * עם תצלום מותג (כרטיס הביקור מהמיתוג) שנמזג לתוך רקע הנייבי בצד.
+ */
 import { SITE } from "../config/site";
 
 interface Props {
@@ -13,7 +16,9 @@ const { title, subtitle, cta = true } = Astro.props;
 ---
 
 <section class="hero">
-  <div class="container">
+  <div class="hero-photo" aria-hidden="true"></div>
+  <div class="container hero-inner">
+    <span class="hero-rule" aria-hidden="true"></span>
     <h1>{title}</h1>
     {subtitle && <p class="hero-subtitle">{subtitle}</p>}
     {
@@ -31,36 +36,62 @@ const { title, subtitle, cta = true } = Astro.props;
 
 <style>
   .hero {
-    background: linear-gradient(160deg, var(--navy-900) 0%, var(--navy-800) 70%, #063462 100%);
+    background: linear-gradient(150deg, var(--navy-900) 0%, var(--navy-800) 75%, #063060 100%);
     color: #e8ecf2;
-    padding-block: clamp(2.8rem, 7vw, 5rem);
+    padding-block: clamp(2.8rem, 6.5vw, 4.8rem);
     position: relative;
     overflow: hidden;
+    border-bottom: 1px solid rgba(174, 148, 117, 0.45);
   }
 
-  /* מונוגרמה עדינה ברקע */
-  .hero::after {
+  /* תצלום המותג - נמזג מהקצה אל הנייבי */
+  .hero-photo {
+    position: absolute;
+    inset-block: 0;
+    inset-inline-end: 0;
+    width: min(44%, 560px);
+    background: url("/images/inner-hero.webp") center / cover no-repeat;
+    /* דהייה הדרגתית לכיוון הטקסט + האחדה לגוון המותג */
+    -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 0.85), transparent 92%);
+    mask-image: linear-gradient(to right, rgba(0, 0, 0, 0.85), transparent 92%);
+    pointer-events: none;
+  }
+
+  /* שכבת גוון נייבי עדינה מעל התצלום לאחידות */
+  .hero-photo::after {
     content: "";
     position: absolute;
-    inset-block: -20%;
-    inset-inline-end: -4%;
-    width: 340px;
-    background: url("/images/logo-horizontal-white.png") no-repeat center / contain;
-    opacity: 0.05;
-    pointer-events: none;
+    inset: 0;
+    background: rgba(0, 30, 62, 0.38);
+  }
+
+  .hero-inner {
+    position: relative;
+  }
+
+  /* קו זהב קצר מעל הכותרת - מוטיב ההטבעה מהמיתוג */
+  .hero-rule {
+    display: block;
+    width: 52px;
+    height: 3px;
+    border-radius: 2px;
+    background: linear-gradient(to left, var(--gold-500), var(--gold-400));
+    margin-bottom: 1.1rem;
   }
 
   h1 {
     color: var(--white);
-    max-width: 44rem;
+    max-width: 40rem;
     margin-bottom: 0.4em;
+    text-shadow: 0 2px 14px rgba(0, 10, 24, 0.45);
   }
 
   .hero-subtitle {
-    font-size: clamp(1.1rem, 2.2vw, 1.3rem);
-    max-width: 40rem;
+    font-size: clamp(1.05rem, 2.1vw, 1.25rem);
+    max-width: 36rem;
     color: #c9d4e2;
     margin-bottom: 1.6em;
+    text-shadow: 0 1px 10px rgba(0, 10, 24, 0.45);
   }
 
   .hero-actions {
@@ -77,5 +108,19 @@ const { title, subtitle, cta = true } = Astro.props;
   .hero .btn--outline:hover {
     background: var(--gold-400);
     color: var(--navy-900);
+  }
+
+  @media (max-width: 760px) {
+    /* במובייל - התצלום הופך לרקע עדין מאוד מאחורי הכול */
+    .hero-photo {
+      width: 100%;
+      -webkit-mask-image: none;
+      mask-image: none;
+      opacity: 0.16;
+    }
+
+    .hero-photo::after {
+      background: rgba(0, 24, 52, 0.5);
+    }
   }
 </style>
