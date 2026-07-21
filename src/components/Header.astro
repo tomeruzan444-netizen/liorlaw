@@ -100,13 +100,23 @@ const current = Astro.url.pathname;
     height: auto;
   }
 
+  .main-nav {
+    flex-grow: 1;
+  }
+
   .nav-menu {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 1.4rem;
     list-style: none;
     margin: 0;
     padding: 0;
+  }
+
+  /* הטלפון והכפתור נצמדים לקצה - הקישורים נשארים ממורכזים */
+  .nav-phone {
+    margin-inline-start: auto;
   }
 
   .nav-menu li {
