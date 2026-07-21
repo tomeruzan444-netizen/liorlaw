@@ -51,9 +51,9 @@ const { title, subtitle, cta = true } = Astro.props;
     inset-inline-end: 0;
     width: min(44%, 560px);
     background: url("/images/inner-hero.webp") center / cover no-repeat;
-    /* דהייה הדרגתית לכיוון הטקסט + האחדה לגוון המותג */
-    -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 0.85), transparent 92%);
-    mask-image: linear-gradient(to right, rgba(0, 0, 0, 0.85), transparent 92%);
+    /* דהייה רכה משני הצדדים - התמונה נמזגת לנייבי בלי קצה חתוך */
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.9) 32%, rgba(0, 0, 0, 0.8) 60%, transparent 95%);
+    mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.9) 32%, rgba(0, 0, 0, 0.8) 60%, transparent 95%);
     pointer-events: none;
   }
 
