@@ -98,6 +98,7 @@ const faq = [
   <!-- ===== תחומי עיסוק - כרטיסים כהים עם אייקוני זהב ===== -->
   <section class="section services-dark" aria-labelledby="services-title">
     <div class="container">
+      <p class="eyebrow-sm services-eyebrow">תחומי עיסוק</p>
       <h2 id="services-title">תחומי ההתמחות שלנו</h2>
       <p class="services-sub">
         מעטפת משפטית מלאה - מהמשפט הפלילי והצבאי ועד מיצוי זכויות מול משרד
@@ -128,6 +129,7 @@ const faq = [
   <section class="section" aria-labelledby="about-title">
     <div class="container about-grid">
       <div class="about-copy">
+        <p class="eyebrow-sm">הכירו אותנו</p>
         <h2 id="about-title">אודות המשרד</h2>
         <p>
           <strong>עו"ד ליאור עייש</strong>, משפטן בעל למעלה מ-14 שנות ניסיון
@@ -163,6 +165,7 @@ const faq = [
   <!-- ===== למה אנחנו ===== -->
   <section class="section section--tint" aria-labelledby="why-title">
     <div class="container">
+      <p class="eyebrow-sm">הערך שלנו</p>
       <h2 id="why-title">למה לבחור בנו ללוות אתכם?</h2>
       <div class="grid grid--3">
         <div class="why-item">
@@ -196,6 +199,7 @@ const faq = [
   <!-- ===== איך זה עובד ===== -->
   <section class="section" aria-labelledby="process-title">
     <div class="container">
+      <p class="eyebrow-sm">הדרך שלכם</p>
       <h2 id="process-title">איך מתחילים? התהליך בארבעה שלבים</h2>
       <ol class="process">
         <li>
@@ -230,7 +234,8 @@ const faq = [
       linear-gradient(to left, rgba(0, 15, 34, 0.82) 0%, rgba(0, 24, 52, 0.45) 50%, rgba(0, 24, 52, 0.12) 100%),
       url("/images/hero-bg.webp") center 62% / cover no-repeat;
     color: #dce4ee;
-    padding-block: clamp(3rem, 7vw, 5.5rem);
+    /* ריפוד עליון מוגדל - ההדר השקוף מרחף מעל ההירו */
+    padding-block: calc(clamp(3rem, 7vw, 5.5rem) + 4.8rem) clamp(3rem, 7vw, 5.5rem);
   }
 
   @media (max-width: 700px) {
@@ -325,6 +330,11 @@ const faq = [
     margin-bottom: 0.3em;
   }
 
+  .services-eyebrow {
+    text-align: center;
+    color: var(--gold-400);
+  }
+
   .services-sub {
     text-align: center;
     color: #b9c6d6;
@@ -365,6 +375,14 @@ const faq = [
   .dark-card-icon :global(svg) {
     width: 30px;
     height: 30px;
+  }
+
+  .dark-card .dark-card-icon {
+    transition: transform 0.2s ease;
+  }
+
+  .dark-card:hover .dark-card-icon {
+    transform: translateY(-4px);
   }
 
   /* ===== רצועת נתונים ===== */
@@ -445,7 +463,21 @@ const faq = [
     margin-top: 0.6rem;
   }
 
+  .about-image {
+    position: relative;
+  }
+
+  /* מסגרת זהב מוזחת מאחורי התמונה - מוטיב יוקרתי */
+  .about-image::before {
+    content: "";
+    position: absolute;
+    inset: 16px -16px -16px 16px;
+    border: 1px solid var(--gold-400);
+    border-radius: var(--radius);
+  }
+
   .about-image img {
+    position: relative;
     border-radius: var(--radius);
     box-shadow: var(--shadow-lift);
     max-height: 460px;

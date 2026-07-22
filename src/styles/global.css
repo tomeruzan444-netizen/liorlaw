@@ -74,7 +74,17 @@ h4 {
   line-height: 1.25;
   margin: 0 0 0.6em;
   font-weight: 800;
+  letter-spacing: 0.01em;
   text-wrap: balance;
+}
+
+/* שורת פתיח קטנה בזהב מעל כותרות - מוטיב יוקרתי */
+.eyebrow-sm {
+  color: var(--gold-500);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.22em;
+  margin: 0 0 0.5em;
 }
 
 h1 {
@@ -125,7 +135,7 @@ strong {
 }
 
 .section {
-  padding-block: clamp(2.5rem, 6vw, 4.5rem);
+  padding-block: clamp(3.2rem, 7.5vw, 5.8rem);
 }
 
 .section--tint {
@@ -217,8 +227,10 @@ tbody tr:nth-child(even) {
   border-radius: 999px;
   font-weight: 600;
   font-size: 1.05rem;
+  letter-spacing: 0.02em;
   text-decoration: none;
-  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease,
+    background-position 0.35s ease;
   border: 2px solid transparent;
   cursor: pointer;
   font-family: var(--font-body);
@@ -240,12 +252,14 @@ tbody tr:nth-child(even) {
 }
 
 .btn--gold {
-  background: var(--gold-500);
+  background: linear-gradient(120deg, var(--gold-500) 0%, var(--gold-400) 50%, var(--gold-500) 100%);
+  background-size: 220% auto;
+  background-position: 0% center;
   color: var(--navy-900);
 }
 
 .btn--gold:hover {
-  background: var(--gold-400);
+  background-position: 100% center;
   color: var(--navy-900);
 }
 
@@ -275,9 +289,40 @@ tbody tr:nth-child(even) {
   background: var(--white);
   border: 1px solid rgba(199, 176, 147, 0.35);
   border-radius: var(--radius);
-  padding: 1.6rem;
+  padding: 2rem 1.8rem;
   box-shadow: var(--shadow);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* ציטוט מודגש במסגרת זהב - מוטיב ההטבעה מהמיתוג */
+.prose blockquote {
+  margin: 1.8em 0;
+  padding: 1.5rem 1.7rem 1.4rem;
+  border: 1px solid var(--gold-400);
+  border-radius: var(--radius);
+  position: relative;
+  background: var(--white);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--navy-800);
+  line-height: 1.6;
+}
+
+.prose blockquote::before {
+  content: "”";
+  position: absolute;
+  top: -0.55em;
+  inset-inline-start: 1.2rem;
+  font-size: 3rem;
+  line-height: 1;
+  color: var(--gold-500);
+  background: var(--cream);
+  padding-inline: 0.3rem;
+  font-family: Georgia, serif;
+}
+
+.prose blockquote p {
+  margin: 0;
 }
 
 .card:hover {

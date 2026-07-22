@@ -90,6 +90,14 @@ const year = new Date().getFullYear();
     line-height: 1.7;
   }
 
+  /* מפריד זהב עדין בין העמודות */
+  @media (min-width: 901px) {
+    .footer-col {
+      border-inline-start: 1px solid rgba(174, 148, 117, 0.22);
+      padding-inline-start: 2rem;
+    }
+  }
+
   .footer-col h3 {
     color: var(--gold-400);
     font-size: 1.1rem;
