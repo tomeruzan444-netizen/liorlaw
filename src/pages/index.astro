@@ -7,6 +7,11 @@ import { SITE, SERVICES } from "../config/site";
 
 // אייקוני זהב לכרטיסי השירות (לפי נתיב העמוד)
 const icons: Record<string, string> = {
+  "/criminal-law/": `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M4 21V10M20 21V10M8 21v-7M12 21v-7M16 21v-7M2 10h20L12 3 2 10z"/></svg>`,
+  "/immigration-status/": `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.7 3.8 9S14.5 18.4 12 21c-2.5-2.6-3.8-5.7-3.8-9S9.5 5.6 12 3z"/></svg>`,
+  "/military-law/": `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4l7 4 7-4M5 10l7 4 7-4M5 16l7 4 7-4"/></svg>`,
+  "/white-collar/": `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18M12 12v3"/></svg>`,
+  "/crime-victims/": `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7.5" r="3.5"/><path d="M5 21a7 7 0 0 1 14 0M16.5 11.5l2 2 3.5-3.5"/></svg>`,
   "/mod-claims/": `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M8 21h8M12 6l-6 2 2.5 6a3.5 3.5 0 0 1-5 0L6 8M12 6l6 2-2.5 6a3.5 3.5 0 0 0 5 0L18 8"/></svg>`,
   "/ptsd-lawyer/": `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.6-9.3-9A5.4 5.4 0 0 1 12 6.3 5.4 5.4 0 0 1 21.3 12C19 16.4 12 21 12 21z"/><path d="M5 12h4l1.5-3 3 6L15 12h4"/></svg>`,
   "/terror-victims/": `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v5c0 5-3.4 8.6-8 10-4.6-1.4-8-5-8-10V6l8-3z"/><path d="M9 12l2 2 4-4"/></svg>`,
@@ -95,7 +100,7 @@ const faq = [
     <div class="container">
       <h2 id="services-title">תחומי ההתמחות שלנו</h2>
       <p class="services-sub">
-        התמחות אחת ממוקדת: מיצוי זכויות של מי שנפגעו במהלך שירותם - מול משרד
+        מעטפת משפטית מלאה - מהמשפט הפלילי והצבאי ועד מיצוי זכויות מול משרד
         הביטחון והמוסד לביטוח לאומי.
       </p>
       <div class="grid grid--3">

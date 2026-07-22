@@ -38,6 +38,11 @@ export const NAV = [
     title: "תחומי עיסוק",
     href: "#",
     children: [
+      { title: "משפט פלילי", href: "/criminal-law/" },
+      { title: "מעמד והגירה לתושבי חוץ", href: "/immigration-status/" },
+      { title: "דיני צבא וביטחון", href: "/military-law/" },
+      { title: "צווארון לבן", href: "/white-collar/" },
+      { title: "ייצוג נפגעות ונפגעי עבירה", href: "/crime-victims/" },
       { title: "תביעות נגד משרד הביטחון", href: "/mod-claims/" },
       { title: "עורך דין פוסט טראומה", href: "/ptsd-lawyer/" },
       { title: "נפגעי פעולות איבה", href: "/terror-victims/" },
@@ -48,7 +53,33 @@ export const NAV = [
 ] as const;
 
 // רשימת עמודי השירות - לשימוש בכרטיסים, בקישורים פנימיים ובפוטר
+// הסדר קובע את סדר התצוגה בתפריט, בפוטר ובכרטיסים - משפט פלילי ראשון
 export const SERVICES = [
+  {
+    title: "משפט פלילי",
+    href: "/criminal-law/",
+    short: "ייצוג בתיקים חמורים ומורכבים: עבירות מין, נשק, המתה ורשלנות",
+  },
+  {
+    title: "מעמד והגירה לתושבי חוץ",
+    href: "/immigration-status/",
+    short: "מעמד לבני זוג זרים, אשרות, תושבות ואזרחות מול רשות האוכלוסין",
+  },
+  {
+    title: "דיני צבא וביטחון",
+    href: "/military-law/",
+    short: 'חקירות מצ"ח, בתי דין צבאיים, עריקות וערעור על קביעות רפואיות',
+  },
+  {
+    title: "צווארון לבן",
+    href: "/white-collar/",
+    short: "מרמה, עבירות מס, הלבנת הון ועבירות ניירות ערך - בדיסקרטיות מלאה",
+  },
+  {
+    title: "ייצוג נפגעות ונפגעי עבירה",
+    href: "/crime-victims/",
+    short: "מימוש זכויות בהליך הפלילי, ערר על סגירת תיק ותביעות פיצויים",
+  },
   {
     title: "תביעות נגד משרד הביטחון",
     href: "/mod-claims/",
