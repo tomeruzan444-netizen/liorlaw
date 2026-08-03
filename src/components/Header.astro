@@ -121,13 +121,14 @@ const isHome = current === "/";
     display: block;
   }
 
-  .overlay:not(.solid) .nav-menu a:not(.btn),
+  /* רק קישורי התפריט הראשי מולבנים - לא הקישורים בתפריט הנפתח (רקע לבן) */
+  .overlay:not(.solid) .nav-menu > li > a:not(.btn),
   .overlay:not(.solid) .sub-toggle,
   .overlay:not(.solid) .nav-phone a {
     color: #f0f4f9;
   }
 
-  .overlay:not(.solid) .nav-menu a:not(.btn):hover,
+  .overlay:not(.solid) .nav-menu > li > a:not(.btn):hover,
   .overlay:not(.solid) .sub-toggle:hover {
     color: var(--gold-400);
   }
