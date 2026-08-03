@@ -10,7 +10,7 @@ const WEB3FORMS_KEY = ""; // PLACEHOLDER - אותו מפתח כמו ב-ContactFo
   {WEB3FORMS_KEY && <input type="hidden" name="access_key" value={WEB3FORMS_KEY} />}
   <input type="checkbox" name="botcheck" style="display: none;" tabindex="-1" autocomplete="off" />
 
-  <p class="lead-form-title">בדיקת זכאות ראשונית - ללא עלות</p>
+  <p class="lead-form-title">צרו איתנו קשר</p>
 
   <div class="lead-field">
     <label for="lf-name" class="visually-hidden">שם מלא</label>
@@ -21,8 +21,12 @@ const WEB3FORMS_KEY = ""; // PLACEHOLDER - אותו מפתח כמו ב-ContactFo
     <input id="lf-phone" name="phone" type="tel" placeholder="טלפון *" required autocomplete="tel" />
   </div>
   <div class="lead-field">
-    <label for="lf-email" class="visually-hidden">אימייל</label>
-    <input id="lf-email" name="email" type="email" placeholder="אימייל" autocomplete="email" />
+    <label for="lf-email" class="visually-hidden">מייל</label>
+    <input id="lf-email" name="email" type="email" placeholder="מייל" autocomplete="email" />
+  </div>
+  <div class="lead-field">
+    <label for="lf-message" class="visually-hidden">הודעה</label>
+    <textarea id="lf-message" name="message" placeholder="הודעה" rows="3"></textarea>
   </div>
 
   <label class="lead-consent">
@@ -37,13 +41,14 @@ const WEB3FORMS_KEY = ""; // PLACEHOLDER - אותו מפתח כמו ב-ContactFo
 </form>
 
 <style>
-  /* כרטיס זכוכית - שקוף-כהה, משתלב בתמונת ההירו */
+  /* כרטיס פנייה - נבדל מרקע הנייבי במסגרת זהב עדינה */
   .lead-form {
-    background: rgba(0, 18, 40, 0.42);
-    backdrop-filter: blur(14px) saturate(1.1);
-    -webkit-backdrop-filter: blur(14px) saturate(1.1);
-    border: 1px solid rgba(255, 255, 255, 0.16);
-    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 1px solid rgba(199, 176, 147, 0.4);
+    border-top: 3px solid var(--gold-500);
+    border-radius: 14px;
     padding: 2rem 1.8rem;
     box-shadow: 0 24px 60px rgba(0, 10, 24, 0.35);
   }
@@ -74,7 +79,8 @@ const WEB3FORMS_KEY = ""; // PLACEHOLDER - אותו מפתח כמו ב-ContactFo
   /* שדות מינימליסטיים - קו תחתון בלבד */
   input[type="text"],
   input[type="tel"],
-  input[type="email"] {
+  input[type="email"],
+  textarea {
     width: 100%;
     padding: 0.85rem 0.2rem;
     border: none;
@@ -87,7 +93,13 @@ const WEB3FORMS_KEY = ""; // PLACEHOLDER - אותו מפתח כמו ב-ContactFo
     transition: border-color 0.2s ease;
   }
 
-  input::placeholder {
+  textarea {
+    resize: vertical;
+    min-height: 2.6rem;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
     color: rgba(255, 255, 255, 0.65);
   }
 
@@ -95,7 +107,8 @@ const WEB3FORMS_KEY = ""; // PLACEHOLDER - אותו מפתח כמו ב-ContactFo
     direction: rtl;
   }
 
-  input:focus {
+  input:focus,
+  textarea:focus {
     outline: none;
     border-bottom-color: var(--gold-400);
     box-shadow: 0 1px 0 0 var(--gold-400);
