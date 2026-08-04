@@ -47,20 +47,13 @@ const crumbs = [{ title: "יצירת קשר", href: "/contact/" }];
             <strong>כתובת</strong>
             <span>{SITE.address.full}</span>
           </li>
-          <li>
-            <strong>שעות פעילות</strong>
-            <span>{SITE.hours}</span>
-          </li>
         </ul>
 
         <div class="contact-note">
-          <h3>מה כדאי להכין לשיחה?</h3>
-          <ul>
-            <li>תיאור קצר של המקרה או ההליך</li>
-            <li>מסמכים רלוונטיים, אם יש (זימון לחקירה, כתב אישום, מכתב החלטה)</li>
-            <li>מועדים קרובים שחשוב שנדע עליהם</li>
-          </ul>
-          <p>אין מסמכים? לא נורא - נתחיל מהסיפור שלכם.</p>
+          <p>
+            במקרים דחופים, אנא התקשרו ל<a href={`tel:${SITE.phoneIntl}`}>מספר הטלפון שלנו</a>
+            ונענה באופן מיידי.
+          </p>
         </div>
       </aside>
     </div>

@@ -1,33 +1,8 @@
 ---
 import Base from "../layouts/Base.astro";
 import LeadForm from "../components/LeadForm.astro";
+import PracticeAreas from "../components/PracticeAreas.astro";
 import { SITE } from "../config/site";
-
-// אייקוני זהב לכרטיסי תחומי ההתמחות
-const icons: Record<string, string> = {
-  homicide: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3l7 7M17.5 6.5l-11 11M5 14l5 5M3 21l3.5-3.5M10.5 10.5l3 3"/></svg>`,
-  sex: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-8-4.6-8-11a4 4 0 0 1 8-1 4 4 0 0 1 8 1c0 6.4-8 11-8 11z"/><path d="M9.5 11.5l1.7 1.7 3.3-3.3"/></svg>`,
-  weapons: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v5c0 5-3.4 8.6-8 10-4.6-1.4-8-5-8-10V6l8-3z"/><path d="M9.5 9.5l5 5M14.5 9.5l-5 5"/></svg>`,
-  whitecollar: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18M12 12v3"/></svg>`,
-  criminal: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M4 21V10M20 21V10M8 21v-7M12 21v-7M16 21v-7M2 10h20L12 3 2 10z"/></svg>`,
-  military: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4l7 4 7-4M5 10l7 4 7-4M5 16l7 4 7-4"/></svg>`,
-  status: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="11" r="2"/><path d="M5.5 16a3 3 0 0 1 6 0M14 10h4M14 13.5h3"/></svg>`,
-  ptsd: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.6-9.3-9A5.4 5.4 0 0 1 12 6.3 5.4 5.4 0 0 1 21.3 12C19 16.4 12 21 12 21z"/><path d="M5 12h4l1.5-3 3 6L15 12h4"/></svg>`,
-  mod: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v5c0 5-3.4 8.6-8 10-4.6-1.4-8-5-8-10V6l8-3z"/><path d="M12 8v8M8 12h8"/></svg>`,
-};
-
-// תחומי ההתמחות בעמוד הבית - לפי הסדר שנקבע
-const HOME_SERVICES = [
-  { title: "עבירות המתה ורשלנות", short: "ייצוג בעבירות רצח, הריגה וגרימת מוות ברשלנות", href: "/criminal-law/", icon: "homicide" },
-  { title: "עבירות מין חמורות", short: "עבירות מין חמורות ועבירות לפי החוק למניעת הטרדה מינית", href: "/criminal-law/", icon: "sex" },
-  { title: "עבירות בנשק", short: "החזקה, סחר וירי - ייצוג בעבירות נשק", href: "/criminal-law/", icon: "weapons" },
-  { title: "צווארון לבן", short: "מרמה, עבירות מס, הלבנת הון ועבירות ניירות ערך", href: "/white-collar/", icon: "whitecollar" },
-  { title: "משפט פלילי", short: "ייצוג בכל סוגי העבירות הפליליות", href: "/criminal-law/", icon: "criminal" },
-  { title: "דיני צבא וביטחון", short: 'ייעוץ בחקירות מצ"ח וייצוג בפני בתי דין צבאיים', href: "/military-law/", icon: "military" },
-  { title: 'הסדרת מעמד מול צה"ל', short: "אזרחים יורדים, בני מהגרים וספורטאים מצטיינים", href: "/military-service-status/", icon: "status" },
-  { title: "הכרה בפוסט טראומה", short: "תביעה להכרה בפוסט טראומה בעקבות השירות הצבאי", href: "/ptsd-lawyer/", icon: "ptsd" },
-  { title: "תביעות נגד משרד הביטחון", short: "הכרה בנכות, החמרת מצב ותגמולים לחיילים ואנשי כוחות הביטחון", href: "/mod-claims/", icon: "mod" },
-];
 ---
 
 <Base
@@ -43,11 +18,11 @@ const HOME_SERVICES = [
         <h1>משפט פלילי, צווארון לבן, דיני צבא וביטחון</h1>
         <p class="lead">
           משרד בוטיק המתמחה בייצוג בהליכים משפטיים מורכבים, בניהול אסטרטגיה
-          משפטית וניהול משברים.
+          משפטית וניהול משברים
         </p>
         <div class="hero-phone">
           <a href={`tel:${SITE.phoneIntl}`} class="btn btn--outline">
-            או חייגו עכשיו: <bdo dir="ltr">{SITE.phone}</bdo>
+            חייגו עכשיו: <bdo dir="ltr">{SITE.phone}</bdo>
           </a>
         </div>
       </div>
@@ -76,23 +51,7 @@ const HOME_SERVICES = [
   </section>
 
   <!-- ===== תחומי ההתמחות ===== -->
-  <section class="section services-dark" aria-labelledby="services-title">
-    <div class="container">
-      <h2 id="services-title">תחומי ההתמחות שלנו</h2>
-      <div class="grid grid--3">
-        {
-          HOME_SERVICES.map((s) => (
-            <a class="dark-card" href={s.href}>
-              <span class="dark-card-icon" set:html={icons[s.icon]} />
-              <h3>{s.title}</h3>
-              <p>{s.short}</p>
-              <span class="more">למידע נוסף ←</span>
-            </a>
-          ))
-        }
-      </div>
-    </div>
-  </section>
+  <PracticeAreas />
 </Base>
 
 <style>
@@ -194,78 +153,5 @@ const HOME_SERVICES = [
       grid-template-columns: 1fr;
       gap: 1.1rem;
     }
-  }
-
-  /* ===== תחומי ההתמחות - כרטיסים כהים ===== */
-  .services-dark {
-    background: linear-gradient(165deg, var(--navy-900) 0%, var(--navy-800) 100%);
-  }
-
-  .services-dark h2 {
-    color: var(--white);
-    text-align: center;
-    margin-bottom: 1.6rem;
-  }
-
-  .dark-card {
-    background: rgba(255, 255, 255, 0.045);
-    border: 1px solid rgba(174, 148, 117, 0.45);
-    border-radius: var(--radius);
-    padding: 1.7rem 1.5rem;
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
-  }
-
-  .dark-card:hover {
-    transform: translateY(-4px);
-    background: rgba(255, 255, 255, 0.09);
-    border-color: var(--gold-400);
-  }
-
-  .dark-card-icon {
-    width: 62px;
-    height: 62px;
-    color: var(--gold-400);
-    margin-bottom: 1.1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background: rgba(174, 148, 117, 0.14);
-    border: 1px solid rgba(174, 148, 117, 0.35);
-    transition: transform 0.2s ease;
-  }
-
-  .dark-card-icon :global(svg) {
-    width: 30px;
-    height: 30px;
-  }
-
-  .dark-card:hover .dark-card-icon {
-    transform: translateY(-4px);
-  }
-
-  .dark-card h3 {
-    color: var(--white);
-    font-size: 1.2rem;
-    margin-bottom: 0.45em;
-  }
-
-  .dark-card p {
-    color: #b9c6d6;
-    font-size: 0.98rem;
-    margin-bottom: 1em;
-    flex-grow: 1;
-  }
-
-  .dark-card .more {
-    color: var(--gold-400);
-    font-weight: 600;
-  }
-
-  .dark-card:hover .more {
-    text-decoration: underline;
   }
 </style>

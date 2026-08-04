@@ -16,13 +16,12 @@ export const SITE = {
   // ===== פרטי קשר =====
   phone: "050-9934546",
   phoneIntl: "+972509934546", // לקישורי tel: ו-WhatsApp
-  email: "office@lior-ayash.co.il", // PLACEHOLDER - לעדכן מייל אמיתי
+  email: "lior@ayashlaw.com",
   address: {
     street: "וינגייט 14",
     city: "תל אביב",
     full: "וינגייט 14, תל אביב",
   },
-  hours: "ימים א'-ה' 9:00-18:00",
 
   // קישור וואטסאפ עם הודעה מוכנה
   whatsapp:
@@ -30,21 +29,30 @@ export const SITE = {
     encodeURIComponent("שלום, אשמח לקבוע שיחת ייעוץ"),
 } as const;
 
-// ניווט ראשי
+// ===== תחומי ההתמחות =====
+// מקור אמת אחד לכרטיסי עמוד הבית, לתפריט "תחומי עיסוק" ולעמוד אודות.
+// icon = מזהה האייקון (ה-SVG עצמו ב-PracticeAreas.astro). הסדר קובע את סדר התצוגה.
+export const PRACTICE_AREAS = [
+  { title: "עבירות המתה ורשלנות", short: "מומחיות ייחודית בטיפול בתיקי המתה", href: "/criminal-law/", icon: "homicide" },
+  { title: "עבירות מין חמורות", short: "עבירות מין חמורות ועבירות לפי החוק למניעת הטרדה מינית", href: "/criminal-law/", icon: "sex" },
+  { title: "עבירות בנשק", short: "החזקה, סחר וירי - ייצוג בעבירות נשק", href: "/criminal-law/", icon: "weapons" },
+  { title: 'חקירות מח"ש', short: 'היכרות מעמיקה עם הוראות הפתיחה באש וכללי הפעלת הכוח באיו"ש', href: "/military-law/", icon: "mahash" },
+  { title: "צווארון לבן", short: "מרמה, עבירות מס, הלבנת הון ועבירות ניירות ערך", href: "/white-collar/", icon: "whitecollar" },
+  { title: "משפט פלילי", short: "ייצוג בכל סוגי העבירות הפליליות", href: "/criminal-law/", icon: "criminal" },
+  { title: "דיני צבא וביטחון", short: 'ייעוץ בחקירות מצ"ח וייצוג בפני בתי דין צבאיים', href: "/military-law/", icon: "military" },
+  { title: 'הסדרת מעמד מול צה"ל', short: "אזרחים יורדים, בני מהגרים וספורטאים מצטיינים", href: "/military-service-status/", icon: "status" },
+  { title: "הכרה בפוסט טראומה", short: "תביעה להכרה בפוסט טראומה בעקבות השירות הצבאי", href: "/ptsd-lawyer/", icon: "ptsd" },
+  { title: "תביעות נגד משרד הביטחון", short: "הכרה בנכות, החמרת מצב ותגמולים לחיילים ואנשי כוחות הביטחון", href: "/mod-claims/", icon: "mod" },
+] as const;
+
+// ניווט ראשי - תפריט "תחומי עיסוק" מציג את אותם הנושאים כמו בעמוד הבית
 export const NAV = [
   { title: "בית", href: "/" },
   { title: "אודות", href: "/about/" },
   {
     title: "תחומי עיסוק",
     href: "#",
-    children: [
-      { title: "משפט פלילי", href: "/criminal-law/" },
-      { title: "צווארון לבן", href: "/white-collar/" },
-      { title: "דיני צבא וביטחון", href: "/military-law/" },
-      { title: 'הסדרת מעמד מול צה"ל', href: "/military-service-status/" },
-      { title: "הכרה בפוסט טראומה", href: "/ptsd-lawyer/" },
-      { title: "תביעות נגד משרד הביטחון", href: "/mod-claims/" },
-    ],
+    children: PRACTICE_AREAS.map((p) => ({ title: p.title, href: p.href })),
   },
 ] as const;
 
