@@ -6,6 +6,10 @@
 // הדומיין - לעדכן כשנרכש דומיין אמיתי (משפיע על canonical, sitemap, OG, Schema)
 export const SITE_URL = "https://www.lior-ayash.co.il";
 
+// ‼️ חוסם אינדוקס במנועי חיפוש (noindex, nofollow) בזמן הפיתוח.
+// כשעולים לאוויר סופית - לשנות ל-false כדי לאפשר קידום אורגני.
+export const NOINDEX = true;
+
 export const SITE = {
   name: 'עו"ד ליאור עייש - משרד עורכי דין',
   shortName: "ליאור עייש",
