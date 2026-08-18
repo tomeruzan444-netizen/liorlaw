@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.lior-ayash.co.il/sitemap-index.xml
+Sitemap: https://ayashlaw.co.il/sitemap-index.xml

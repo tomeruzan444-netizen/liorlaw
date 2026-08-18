@@ -3,8 +3,8 @@
  * כשמתקבלים פרטים אמיתיים (דומיין, טלפון, כתובת) מעדכנים רק כאן.
  */
 
-// הדומיין - לעדכן כשנרכש דומיין אמיתי (משפיע על canonical, sitemap, OG, Schema)
-export const SITE_URL = "https://www.lior-ayash.co.il";
+// הדומיין החי (משפיע על canonical, sitemap, OG, Schema)
+export const SITE_URL = "https://ayashlaw.co.il";
 
 // ‼️ חוסם אינדוקס במנועי חיפוש (noindex, nofollow) בזמן הפיתוח.
 // כשעולים לאוויר סופית - לשנות ל-false כדי לאפשר קידום אורגני.
