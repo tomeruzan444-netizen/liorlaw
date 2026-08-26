@@ -9,8 +9,9 @@ import { SITE } from "../config/site";
   title="עורך דין משפט פלילי, צווארון לבן ודיני צבא וביטחון | ליאור עייש"
   description='עו"ד ליאור עייש, לשעבר סגן התובע הצבאי הראשי: משרד בוטיק לייצוג בהליכים משפטיים מורכבים - משפט פלילי, עבירות צווארון לבן ודיני צבא וביטחון. צרו קשר לייעוץ.'
   path="/"
+  preloadImages={[{ href: "/images/lior-home.webp" }]}
 >
-  <!-- ===== Hero: כותרת + תיבת פניות על רקע נקי ===== -->
+  <!-- ===== Hero: כותרת + תמונה של ליאור + תיבת פניות ===== -->
   <section class="home-hero">
     <div class="container hero-grid">
       <div class="hero-copy">
@@ -18,7 +19,7 @@ import { SITE } from "../config/site";
         <h1>משפט פלילי, צווארון לבן, דיני צבא וביטחון</h1>
         <p class="lead">
           משרד בוטיק המתמחה בייצוג בהליכים משפטיים מורכבים, בניהול אסטרטגיה
-          משפטית וניהול משברים
+          משפטית וניהול משברים.
         </p>
         <div class="hero-phone">
           <a href={`tel:${SITE.phoneIntl}`} class="btn btn--outline">
@@ -26,6 +27,17 @@ import { SITE } from "../config/site";
           </a>
         </div>
       </div>
+
+      <div class="hero-photo">
+        <img
+          src="/images/lior-home.webp"
+          alt='עו"ד ליאור עייש - משרד עורכי דין'
+          width="820"
+          height="1230"
+          fetchpriority="high"
+        />
+      </div>
+
       <div class="hero-form">
         <LeadForm />
       </div>
@@ -52,65 +64,52 @@ import { SITE } from "../config/site";
 
   <!-- ===== תחומי ההתמחות ===== -->
   <PracticeAreas />
-
-  <!-- ===== הכירו את עו"ד עייש ===== -->
-  <section class="section attorney" aria-labelledby="attorney-title">
-    <div class="container attorney-grid">
-      <div class="attorney-photo">
-        <img
-          src="/images/lior-home.webp"
-          alt='עו"ד ליאור עייש - משרד עורכי דין'
-          width="820"
-          height="1230"
-          loading="lazy"
-        />
-      </div>
-      <div class="attorney-text">
-        <p class="eyebrow-sm">הכירו אותנו</p>
-        <h2 id="attorney-title">עו"ד ליאור עייש</h2>
-        <p>
-          לשעבר סגן התובע הצבאי הראשי בדרגת סגן אלוף, עם למעלה מ-14 שנות ניסיון
-          משני צידי המתרס - כתובע בכיר וכסנגור. המשרד מתמחה בליטיגציה מורכבת,
-          בניהול אסטרטגיה משפטית ובניהול משברים ברגעים המכריעים ביותר.
-        </p>
-        <div class="attorney-cta">
-          <a href="/about/" class="btn btn--primary">אודות המשרד</a>
-          <a href="/contact/" class="btn btn--outline">צרו קשר</a>
-        </div>
-      </div>
-    </div>
-  </section>
 </Base>
 
 <style>
-  /* ===== Hero - רקע נקי בגווני המותג ===== */
+  /* ===== Hero - כותרת + תמונה + טופס ===== */
   .home-hero {
     background: linear-gradient(155deg, var(--navy-900) 0%, var(--navy-800) 60%, #063362 100%);
     color: #dce4ee;
     position: relative;
     overflow: hidden;
     /* ריפוד עליון מוגדל - ההדר השקוף מרחף מעל ההירו */
-    padding-block: calc(clamp(3rem, 7vw, 5.5rem) + 4.8rem) clamp(3rem, 7vw, 5.5rem);
-  }
-
-  /* מונוגרמת המותג כסימן מים עדין */
-  .home-hero::after {
-    content: "";
-    position: absolute;
-    inset-block: -12%;
-    inset-inline-end: -3%;
-    width: min(38vw, 460px);
-    background: url("/images/logo-horizontal-white.png") no-repeat center / contain;
-    opacity: 0.05;
-    pointer-events: none;
+    padding-block: calc(clamp(2.5rem, 6vw, 4.5rem) + 4.6rem) clamp(2.5rem, 6vw, 4.5rem);
   }
 
   .hero-grid {
     display: grid;
-    grid-template-columns: 1.3fr 1fr;
-    gap: clamp(2rem, 5vw, 4rem);
-    align-items: center;
+    grid-template-columns: 1.05fr 0.95fr;
+    grid-template-areas: "copy photo" "form photo";
+    column-gap: clamp(1.5rem, 3.5vw, 3rem);
+    row-gap: 1.6rem;
+    align-items: start;
+  }
+
+  .hero-copy {
+    grid-area: copy;
+  }
+
+  .hero-form {
+    grid-area: form;
+  }
+
+  .hero-photo {
+    grid-area: photo;
+    align-self: stretch;
     position: relative;
+    min-height: 100%;
+  }
+
+  .hero-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 12%;
+    display: block;
+    border-radius: 16px;
+    border: 1px solid rgba(199, 176, 147, 0.35);
+    box-shadow: 0 22px 55px rgba(0, 8, 20, 0.45);
   }
 
   .eyebrow {
@@ -122,14 +121,12 @@ import { SITE } from "../config/site";
 
   .home-hero h1 {
     color: var(--white);
-    max-width: 46rem;
   }
 
   .lead {
-    font-size: clamp(1.1rem, 2.2vw, 1.35rem);
-    max-width: 40rem;
+    font-size: clamp(1.05rem, 2vw, 1.28rem);
     color: #c9d4e2;
-    margin-bottom: 1.6em;
+    margin-bottom: 1.5em;
     line-height: 1.7;
   }
 
@@ -146,6 +143,19 @@ import { SITE } from "../config/site";
   @media (max-width: 900px) {
     .hero-grid {
       grid-template-columns: 1fr;
+      grid-template-areas: "copy" "photo" "form";
+    }
+
+    .hero-photo {
+      align-self: auto;
+      max-width: 440px;
+      margin-inline: auto;
+      width: 100%;
+    }
+
+    .hero-photo img {
+      height: 420px;
+      object-position: 50% 10%;
     }
   }
 
@@ -180,67 +190,6 @@ import { SITE } from "../config/site";
     .stats-grid {
       grid-template-columns: 1fr;
       gap: 1.1rem;
-    }
-  }
-
-  /* ===== רצועת הכירו את עו"ד עייש ===== */
-  .attorney {
-    background: var(--gold-100);
-  }
-
-  .attorney-grid {
-    display: grid;
-    grid-template-columns: 0.8fr 1.2fr;
-    gap: clamp(1.5rem, 4vw, 3.2rem);
-    align-items: center;
-  }
-
-  .attorney-photo {
-    position: relative;
-  }
-
-  /* מסגרת זהב מוזחת - מוטיב מהמיתוג */
-  .attorney-photo::before {
-    content: "";
-    position: absolute;
-    inset: 16px 16px -16px -16px;
-    border: 1px solid var(--gold-500);
-    border-radius: var(--radius);
-    pointer-events: none;
-  }
-
-  .attorney-photo img {
-    position: relative;
-    width: 100%;
-    display: block;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow-lift);
-  }
-
-  .attorney-text h2 {
-    margin-top: 0;
-    font-size: clamp(1.6rem, 3.2vw, 2.1rem);
-  }
-
-  .attorney-cta {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    margin-top: 1.4rem;
-  }
-
-  @media (max-width: 760px) {
-    .attorney-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .attorney-photo {
-      max-width: 340px;
-      margin-inline: auto;
-    }
-
-    .attorney-photo::before {
-      inset: 11px 11px -11px -11px;
     }
   }
 </style>
