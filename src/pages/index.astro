@@ -52,6 +52,34 @@ import { SITE } from "../config/site";
 
   <!-- ===== תחומי ההתמחות ===== -->
   <PracticeAreas />
+
+  <!-- ===== הכירו את עו"ד עייש ===== -->
+  <section class="section attorney" aria-labelledby="attorney-title">
+    <div class="container attorney-grid">
+      <div class="attorney-photo">
+        <img
+          src="/images/lior-home.webp"
+          alt='עו"ד ליאור עייש - משרד עורכי דין'
+          width="820"
+          height="1230"
+          loading="lazy"
+        />
+      </div>
+      <div class="attorney-text">
+        <p class="eyebrow-sm">הכירו אותנו</p>
+        <h2 id="attorney-title">עו"ד ליאור עייש</h2>
+        <p>
+          לשעבר סגן התובע הצבאי הראשי בדרגת סגן אלוף, עם למעלה מ-14 שנות ניסיון
+          משני צידי המתרס - כתובע בכיר וכסנגור. המשרד מתמחה בליטיגציה מורכבת,
+          בניהול אסטרטגיה משפטית ובניהול משברים ברגעים המכריעים ביותר.
+        </p>
+        <div class="attorney-cta">
+          <a href="/about/" class="btn btn--primary">אודות המשרד</a>
+          <a href="/contact/" class="btn btn--outline">צרו קשר</a>
+        </div>
+      </div>
+    </div>
+  </section>
 </Base>
 
 <style>
@@ -152,6 +180,67 @@ import { SITE } from "../config/site";
     .stats-grid {
       grid-template-columns: 1fr;
       gap: 1.1rem;
+    }
+  }
+
+  /* ===== רצועת הכירו את עו"ד עייש ===== */
+  .attorney {
+    background: var(--gold-100);
+  }
+
+  .attorney-grid {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: clamp(1.5rem, 4vw, 3.2rem);
+    align-items: center;
+  }
+
+  .attorney-photo {
+    position: relative;
+  }
+
+  /* מסגרת זהב מוזחת - מוטיב מהמיתוג */
+  .attorney-photo::before {
+    content: "";
+    position: absolute;
+    inset: 16px 16px -16px -16px;
+    border: 1px solid var(--gold-500);
+    border-radius: var(--radius);
+    pointer-events: none;
+  }
+
+  .attorney-photo img {
+    position: relative;
+    width: 100%;
+    display: block;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lift);
+  }
+
+  .attorney-text h2 {
+    margin-top: 0;
+    font-size: clamp(1.6rem, 3.2vw, 2.1rem);
+  }
+
+  .attorney-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1.4rem;
+  }
+
+  @media (max-width: 760px) {
+    .attorney-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .attorney-photo {
+      max-width: 340px;
+      margin-inline: auto;
+    }
+
+    .attorney-photo::before {
+      inset: 11px 11px -11px -11px;
     }
   }
 </style>
