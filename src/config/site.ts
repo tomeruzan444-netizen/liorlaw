@@ -6,9 +6,8 @@
 // הדומיין החי (משפיע על canonical, sitemap, OG, Schema)
 export const SITE_URL = "https://ayashlaw.co.il";
 
-// ‼️ חוסם אינדוקס במנועי חיפוש (noindex, nofollow) בזמן הפיתוח.
-// כשעולים לאוויר סופית - לשנות ל-false כדי לאפשר קידום אורגני.
-export const NOINDEX = true;
+// חוסם אינדוקס במנועי חיפוש (noindex, nofollow). false = האתר פתוח לאינדוקס וקידום אורגני.
+export const NOINDEX = false;
 
 export const SITE = {
   name: 'עו"ד ליאור עייש - משרד עורכי דין',
