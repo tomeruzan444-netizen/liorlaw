@@ -1,14 +1,17 @@
 ---
 /**
  * טופס לידים קומפקטי להירו של עמוד הבית.
- * עובד באותו מנגנון כמו ContactForm: מצב הדגמה עד שיוזן מפתח Web3Forms.
+ * מחובר ל-FormSubmit.co - הפניות נשלחות למייל שמוגדר ב-SITE.email.
  */
-const WEB3FORMS_KEY = ""; // PLACEHOLDER - אותו מפתח כמו ב-ContactForm
+import { SITE } from "../config/site";
+const ACTION = `https://formsubmit.co/ajax/${SITE.email}`;
 ---
 
-<form class="lead-form" method="POST" action="https://api.web3forms.com/submit" novalidate>
-  {WEB3FORMS_KEY && <input type="hidden" name="access_key" value={WEB3FORMS_KEY} />}
-  <input type="checkbox" name="botcheck" style="display: none;" tabindex="-1" autocomplete="off" />
+<form class="lead-form" method="POST" action={ACTION} novalidate>
+  <input type="hidden" name="_subject" value="פנייה חדשה מהאתר (טופס עמוד הבית)" />
+  <input type="hidden" name="_template" value="table" />
+  <input type="hidden" name="_captcha" value="false" />
+  <input type="text" name="_honey" style="display: none;" tabindex="-1" autocomplete="off" />
 
   <p class="lead-form-title">צרו איתנו קשר</p>
 
@@ -162,16 +165,8 @@ const WEB3FORMS_KEY = ""; // PLACEHOLDER - אותו מפתח כמו ב-ContactFo
     e.preventDefault();
     if (!form.reportValidity() || !status) return;
 
-    const hasKey = !!form.querySelector('input[name="access_key"]');
     status.textContent = "שולח...";
     status.className = "form-status";
-
-    if (!hasKey) {
-      status.textContent = "תודה על פנייתכם! (הטופס עדיין לא מחובר - נחזור אליכם לאחר החיבור)";
-      status.className = "form-status ok";
-      form.reset();
-      return;
-    }
 
     try {
       const res = await fetch(form.action, {
