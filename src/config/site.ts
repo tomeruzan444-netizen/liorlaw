@@ -36,10 +36,10 @@ export const SITE = {
 // מקור אמת אחד לכרטיסי עמוד הבית, לתפריט "תחומי עיסוק" ולעמוד אודות.
 // icon = מזהה האייקון (ה-SVG עצמו ב-PracticeAreas.astro). הסדר קובע את סדר התצוגה.
 export const PRACTICE_AREAS = [
-  { title: "עבירות המתה ורשלנות", short: "מומחיות ייחודית בטיפול בתיקי המתה", href: "/criminal-law/", icon: "homicide" },
-  { title: "עבירות מין חמורות", short: "עבירות מין חמורות ועבירות לפי החוק למניעת הטרדה מינית", href: "/criminal-law/", icon: "sex" },
-  { title: "עבירות בנשק", short: "החזקה, סחר וירי - ייצוג בעבירות נשק", href: "/criminal-law/", icon: "weapons" },
-  { title: 'חקירות מח"ש', short: 'היכרות מעמיקה עם הוראות הפתיחה באש וכללי הפעלת הכוח באיו"ש', href: "/military-law/", icon: "mahash" },
+  { title: "עבירות המתה ורשלנות", short: "מומחיות ייחודית בטיפול בתיקי המתה", href: "/homicide-offenses/", icon: "homicide" },
+  { title: "עבירות מין חמורות", short: "עבירות מין חמורות ועבירות לפי החוק למניעת הטרדה מינית", href: "/sex-offenses/", icon: "sex" },
+  { title: "עבירות בנשק", short: "החזקה, סחר וירי - ייצוג בעבירות נשק", href: "/weapons-offenses/", icon: "weapons" },
+  { title: 'חקירות מח"ש', short: 'היכרות מעמיקה עם הוראות הפתיחה באש וכללי הפעלת הכוח באיו"ש', href: "/mahash-investigations/", icon: "mahash" },
   { title: "צווארון לבן", short: "מרמה, עבירות מס, הלבנת הון ועבירות ניירות ערך", href: "/white-collar/", icon: "whitecollar" },
   { title: "משפט פלילי", short: "ייצוג בכל סוגי העבירות הפליליות", href: "/criminal-law/", icon: "criminal" },
   { title: "דיני צבא וביטחון", short: 'ייעוץ בחקירות מצ"ח וייצוג בפני בתי דין צבאיים', href: "/military-law/", icon: "military" },
